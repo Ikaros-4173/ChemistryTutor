@@ -1,0 +1,5 @@
+<img src="formato.jpg" border="0" width="800" height="100" align="left"> //ajustar img con texto
+<p align="justify">
+
+<div class="box-green">
+<div class="box-grey"> // caja con texto
