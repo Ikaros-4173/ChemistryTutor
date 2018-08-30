@@ -1,0 +1,111 @@
+<html>
+<head><title> Modulo Practico </title>
+<script language=JavaScript>
+var questionNumber;
+
+function answerCorrect(questionNumber, answer) {
+   // la variable 'correct' almacena el valor a devolver 
+   var correct = false;
+   
+   // si la respuesta (answer) proporcionada es la misma que la respuesta correcta
+   // asignada a la pregunta (questionNumber), entonces el valor de 'correct'es true
+   if (answer == answers[questionNumber])
+      correct = true;
+   
+   // se devuelve el valor de 'correct' que será true o false 
+   return correct;
+}
+
+function getQuestion()
+{
+   questionNumber = Math.floor(Math.random() * (questions.length));
+   var questionHTML = "<P>" + questions[questionNumber][0] + "</P>";
+   var questionLength = questions[questionNumber].length;
+   var questionChoice;
+
+   for (questionChoice = 1;questionChoice < questionLength;questionChoice++) {
+      questionHTML = questionHTML + "<INPUT TYPE=radio NAME=radQuestionChoice"
+      if (questionChoice == 1) {
+         questionHTML = questionHTML + " CHECKED";
+      }
+      questionHTML = questionHTML + ">";
+      questionHTML = questionHTML + questions[questionNumber][questionChoice];
+      questionHTML = questionHTML + "<BR>";
+   }
+
+   document.QuestionForm.txtQNumber.value = questionNumber + 1;
+   return questionHTML;
+}
+
+function buttonCheckQ_onclick() {
+   var answer = 0;
+
+   while (document.QuestionForm.radQuestionChoice[answer].checked != true)   {
+      answer++;
+   }
+
+   answer = String.fromCharCode(65 + answer);
+
+   if (answerCorrect(questionNumber,answer) == true) {
+      alert("Respuesta correcta");
+   }
+   else {
+      alert("Respuesta incorrecta");
+   }
+
+   window.location.reload();
+}
+</script>
+</head>
+
+<body>
+<script language=JavaScript>
+var questions = new Array(); // el array questions almacena las preguntas 
+var answers = new Array(); // el array answers almacena las respuestas  
+
+// Se define la pregunta 1 
+questions[0] = new Array();
+questions[0][0] = "Que un Compuesto Quimico";
+questions[0][1] = "La combinacion de uno o varios elementos quimicos";
+questions[0][2] = "una comida";
+questions[0][3] = "Un programa de TV";
+// Asignar la respuesta válida para la pregunta 1 
+answers[0] = "A";
+
+// Se define la pregunta 2 
+questions[1] = new Array();
+questions[1][0] = "Que es la Quimica";
+questions[1][1] = "un caballo";
+questions[1][2] = "una ciencia";
+questions[1][3] = "un articulo";
+questions[1][4] = "una guial";
+// Asignar la respuesta válida para la pregunta 2 
+answers[1] = "B";
+
+// Se define la pregunta 3 
+questions[2] = new Array();
+questions[2][0] = "Que es un Jinete?";
+questions[2][1] = "un obstaculo";
+questions[2][2] = "un par de zapatos";
+questions[2][3] = "La persona que domina un caballo";
+questions[2][4] = "un instrumento musical"; 
+
+// Asignar la respuesta válida para la pregunta 3 
+answers[2] = "C";
+</script>
+
+<FORM NAME="QuestionForm">
+<br\>
+Pregunta
+<INPUT TYPE="text" NAME=txtQNumber SIZE=1>
+
+<SCRIPT LANGUAGE=JavaScript>
+   document.write(getQuestion());
+</SCRIPT>
+<br>
+<INPUT TYPE="button" VALUE="Comprobar respuesta" NAME=buttonCheckQ 
+   onclick="return buttonCheckQ_onclick()">
+</FORM>
+
+</body>
+</html>
